@@ -62,17 +62,10 @@ def profile(request):
     else:
         form = ProfileForm(instance=request.user)
 
-    # orders = Order.objects.filter(user=request.user).prefetch_related(
-    #     Prefetch(
-    #         "orderitem_set",
-    #         queryset=OrderItem.objects.select_related("product"),
-    #     )
-    # ).order_by("-id")
 
     context = {
         'title': 'Home - Кабинет',
         'form': form,
-        # 'orders': orders,
     }
     return render(request, 'users/profile.html', context)
 
