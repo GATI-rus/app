@@ -52,8 +52,6 @@ $(document).ready(function () {
     });
 
 
-
-
     // Ловим собыитие клика по кнопке удалить товар из корзины
     $(document).on("click", ".remove-from-cart", function (e) {
         // Блокируем его базовое действие
@@ -103,9 +101,7 @@ $(document).ready(function () {
     });
 
 
-
-
-    // Теперь + - количества товара 
+    // Теперь + - количества товара
     // Обработчик события для уменьшения значения
     $(document).on("click", ".decrement", function () {
         // Берем ссылку на контроллер django из атрибута data-cart-change-url
@@ -154,12 +150,12 @@ $(document).ready(function () {
             },
 
             success: function (data) {
-                 // Сообщение
+                // Сообщение
                 successMessage.html(data.message);
                 successMessage.fadeIn(400);
-                 // Через 7сек убираем сообщение
+                // Через 7сек убираем сообщение
                 setTimeout(function () {
-                     successMessage.fadeOut(400);
+                    successMessage.fadeOut(400);
                 }, 7000);
 
                 // Изменяем количество товаров в корзине
@@ -189,10 +185,18 @@ $(document).ready(function () {
     }
 
     // При клике по значку корзины открываем всплывающее(модальное) окно
-    $('#modalButton').click(function () {
-        $('#exampleModal').appendTo('body');
+    // $('#modalButton').click(function () {
+    //     $('#exampleModal').appendTo('body');
+    //
+    //     $('#exampleModal').modal('show');
+    // });
 
-        $('#exampleModal').modal('show');
+    $('#modalButton').click(function () {
+        var $exampleModal = $('#exampleModal'); // Кэшируем выборку в переменной
+
+        $exampleModal.appendTo('body');
+
+        $exampleModal.modal('show');
     });
 
     // Собыите клик по кнопке закрыть окна корзины
