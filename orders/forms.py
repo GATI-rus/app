@@ -1,4 +1,6 @@
+import re
 from django import forms
+# import phonenumbers
 
 
 class CreateOrderForm(forms.Form):
@@ -17,10 +19,41 @@ class CreateOrderForm(forms.Form):
         choices=[
             ("0", 'False'),
             ("1", 'True'),
-        ],
-    )
+            ],
+        )
+# Мой вариант
+    # def clean_phone_number(self):
+    #     data = self.cleaned_data['phone_number']
+    #
+    #     # Удаляем все символы, кроме цифр и плюса
+    #     cleaned_data = re.sub(r'\D', '', data)
+    #
+    #     try:
+    #         # Пытаемся разобрать номер телефона
+    #         phone_number = phonenumbers.parse(cleaned_data, "RU")
+    #
+    #         # Проверяем, является ли номер телефона действительным
+    #         if not phonenumbers.is_valid_number(phone_number):
+    #             raise forms.ValidationError("Неверный формат номера")
+    #
+    #         # Возвращаем отформатированный номер телефона
+    #         formatted_number = phonenumbers.format_number(phone_number, phonenumbers.PhoneNumberFormat.E164)
+    #         return formatted_number
+    #
+    #     except phonenumbers.NumberParseException:
+    #         raise forms.ValidationError("Неверный формат номера")
 
+    def clean_phone_number(self):
+        data = self.cleaned_data['phone_number']
 
+        if not data.isdigit():
+            raise forms.ValidationError("Номер телефона должен содержать только цифры")
+
+        pattern = re.compile(r'^\d{10}$')
+        if not pattern.match(data):
+            raise forms.ValidationError("Неверный формат номера")
+
+        return data
 
 
 
