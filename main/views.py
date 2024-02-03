@@ -6,7 +6,8 @@ def index(request):
 
     context = {
         'title': 'Home - Главная',
-        'content': 'Магазин мебели HOME',
+        'content': 'Интернет магазин PHONE-PRO\n'
+                   'Погрузитесь в мир технологий с лучшими устройствами на рынке!',
     }
 
     return render(request, 'main/index.html', context)

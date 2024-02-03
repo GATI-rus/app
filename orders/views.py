@@ -8,6 +8,7 @@ from carts.models import Cart
 
 from orders.forms import CreateOrderForm
 from orders.models import Order, OrderItem
+import telebot
 
 
 @login_required
@@ -31,17 +32,17 @@ def create_order(request):
                         )
                         # Создать заказанные товары
                         for cart_item in cart_items:
-                            product=cart_item.product
-                            name=cart_item.product.name
-                            price=cart_item.product.sell_price()
-                            quantity=cart_item.quantity
+                            product = cart_item.product
+                            name = cart_item.product.name
+                            price = cart_item.product.sell_price()
+                            quantity = cart_item.quantity
 
 
                             if product.quantity < quantity:
                                 raise ValidationError(f'Недостаточное количество товара {name} на складе\
                                                        В наличии - {product.quantity}')
 
-                            OrderItem.objects.create(
+                            neworder = OrderItem.objects.create(
                                 order=order,
                                 product=product,
                                 name=name,
@@ -53,6 +54,8 @@ def create_order(request):
 
                         # Очистить корзину пользователя после создания заказа
                         cart_items.delete()
+
+                        telegram(neworder, cart_item)
 
                         messages.success(request, 'Заказ оформлен!')
                         return redirect('user:profile')
@@ -73,3 +76,25 @@ def create_order(request):
         'orders': True,
     }
     return render(request, 'orders/create_order.html', context=context)
+
+
+def telegram(neworder, cart_item):
+    token = '6716144931:AAEb_gb6qe_PsSNyGOF1TITjFK1CH9Op0lY'
+    chat = '1342409'
+    message = f" Получатель: {neworder.order.user}\n" \
+              f" Телефон: {neworder.order.phone_number}\n" \
+              f" Товар: {cart_item.product.name}\n" \
+              f" Цена: {cart_item.product.sell_price()}\n" \
+              f" Кол-во: {cart_item.quantity}\n"
+
+
+
+
+    bot = telebot.TeleBot(token)
+
+    try:
+        bot.send_message(chat, "Новый заказ")
+        bot.send_message(chat, message)
+        print("Сообщение успешно отправлено")
+    except Exception as e:
+        print(f"Ошибка отправки сообщения: {e}")

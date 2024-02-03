@@ -101,12 +101,12 @@
 
                             {% if product.discount %}
                                 <p><s>{{ product.price }}</s> р.</p>
-                                <p><strong>{{ product.sel_price }} р.</strong></p>
+                                <p><strong>{{ product.sell_price }} р.</strong></p>
                                 <span class="badge bg-warning text-dark">Скидка {{ product.discount }} %</span>
                             {% else %}
                                 <p><strong>{{ product.price }} р.</strong></p>
                             {% endif %}
-                            <a href="{% url "cart:cart_add" %}" class="btn add-to-cart"
+                                <a href="{% url "cart:cart_add" %}" class="btn add-to-cart"
                         data-product-id="{{ product.id }}">
                             {% csrf_token %}
                             <img class="mx-1" src="{% static "deps/icons/cart-plus.svg" %}" alt="Catalog Icon"
