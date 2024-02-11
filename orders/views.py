@@ -51,11 +51,12 @@ def create_order(request):
                             )
                             product.quantity -= quantity
                             product.save()
+                            telegram(neworder, cart_item)
 
                         # Очистить корзину пользователя после создания заказа
                         cart_items.delete()
 
-                        telegram(neworder, cart_item)
+
 
                         messages.success(request, 'Заказ оформлен!')
                         return redirect('user:profile')
@@ -86,9 +87,6 @@ def telegram(neworder, cart_item):
               f" Товар: {cart_item.product.name}\n" \
               f" Цена: {cart_item.product.sell_price()}\n" \
               f" Кол-во: {cart_item.quantity}\n"
-
-
-
 
     bot = telebot.TeleBot(token)
 

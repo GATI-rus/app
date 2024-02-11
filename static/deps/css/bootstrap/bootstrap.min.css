@@ -688,7 +688,7 @@ progress {
     background-color: var(--bs-body-bg);
     border: var(--bs-border-width) solid var(--bs-border-color);
     border-radius: var(--bs-border-radius);
-    max-width: 100%;
+    max-width: 50%;
     height: auto
 }
 
@@ -768,7 +768,7 @@ progress {
 .row > * {
     flex-shrink: 0;
     width: 100%;
-    max-width: 100%;
+    max-width: 80%;
     padding-right: calc(var(--bs-gutter-x) * .5);
     padding-left: calc(var(--bs-gutter-x) * .5);
     margin-top: var(--bs-gutter-y)
@@ -4817,9 +4817,10 @@ textarea.form-control-lg {
 }
 
 .card-img, .card-img-bottom, .card-img-top {
-width: 120px;
-height: 210px;
+width: auto;
+height: 200px;
 margin: auto;
+margin-top: 5px;
 }
 
 .card-img, .card-img-top {
