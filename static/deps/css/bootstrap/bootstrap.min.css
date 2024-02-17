@@ -768,7 +768,8 @@ progress {
 .row > * {
     flex-shrink: 0;
     width: 100%;
-    max-width: 80%;
+    height: 100%;
+    max-width: 100%;
     padding-right: calc(var(--bs-gutter-x) * .5);
     padding-left: calc(var(--bs-gutter-x) * .5);
     margin-top: var(--bs-gutter-y)
@@ -2917,7 +2918,8 @@ textarea.form-control-lg {
     position: relative;
     flex: 1 1 auto;
     width: 1%;
-    min-width: 0
+    min-width: 0;
+    text-align: center;
 }
 
 .input-group > .form-control:focus, .input-group > .form-floating:focus-within, .input-group > .form-select:focus {
