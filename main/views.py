@@ -3,11 +3,26 @@ from django.shortcuts import render
 from goods.models import Categories
 
 
+# def index(request):
+#     context = {
+#         'title': 'Time Shop - Главная',
+#         'content': 'Интернет магазин YOUR TIME SHOP\n'
+#                    '"Открой свой незабываемый момент\n'
+#                    ' с YOUR TIME SHOP: часы, достойные\n'
+#                    ' ТВОЕГО времени!"',
+#     }
+#
+#     return render(request, 'main/index.html', context)
+
 def index(request):
     context = {
-        'title': 'Home - Главная',
-        'content': 'Интернет магазин YOUR TIME SHOP\n'
-                   '"Открой свой незабываемый момент с YOUR TIME SHOP: часы, достойные ТВОЕГО времени!"',
+        'title': 'Time Shop - Главная',
+        'content': '<u>YOUR TIME SHOP</u><br>'
+                   '"Открой свой незабываемый<br>'
+                   'момент с YOUR TIME SHOP<br>'
+                   '<br>'
+                   'Часы - достойные<br>'
+                   'ТВОЕГО времени!"',
     }
 
     return render(request, 'main/index.html', context)
@@ -17,7 +32,7 @@ def about(request):
     context = {
         'title': 'Home - О нас',
         'content': 'О нас',
-        'text_on_page': 'Вас приветствует YOUR TIME SHOP - интернет-магазин, где встречаются стильные часы и безупречное качество!\n'
+        'text_on_page': '\t Вас приветствует YOUR TIME SHOP - интернет-магазин, где встречаются стильные часы и безупречное качество!\n'
                         'Мы с гордостью предлагаем широкий ассортимент часов различных брендов и стилей, чтобы вы могли найти идеальную модель,\n'
                         'которая отражает вашу индивидуальность и подчеркивает ваш уникальный стиль.\n\nМы нацелены на то, чтобы сделать ваше время\n'
                         'особенным и незабываемым. Наша команда профессионалов с особым вниманием отбирает каждую модель, убеждаясь в ее качестве\n'
