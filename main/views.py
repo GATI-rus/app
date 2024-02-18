@@ -19,7 +19,7 @@ def index(request):
         'title': 'Time Shop - Главная',
         'content': '<u>YOUR TIME SHOP</u><br>'
                    '"Открой свой незабываемый<br>'
-                   'момент с YOUR TIME SHOP<br>'
+                   'момент с YOUR TIME SHOP <br>'
                    '<br>'
                    'Часы - достойные<br>'
                    'ТВОЕГО времени!"',
