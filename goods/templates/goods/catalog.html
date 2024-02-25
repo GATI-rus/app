@@ -110,7 +110,7 @@
                         data-product-id="{{ product.id }}">
                             {% csrf_token %}
                             <img class="mx-1" src="{% static "deps/icons/cart-plus.svg" %}" alt="Catalog Icon"
-                                width="32" height="32">
+                                width="32" height="32" title="Добавить в корзину">
                         </a>
                     </div>
                 </div>
@@ -149,10 +149,10 @@
 
 {% endblock content %}
 
-{% block footer %}
-    <footer class="py-4 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Project &copy; Ruskom Home 2024</p>
-        </div>
-    </footer>
-{% endblock footer %}
+{#{% block footer %}#}
+{#    <footer class="py-4 bg-dark">#}
+{#        <div class="container">#}
+{#            <p class="m-0 text-center text-white">Project &copy; Ruskom Home 2024</p>#}
+{#        </div>#}
+{#    </footer>#}
+{#{% endblock footer %}#}

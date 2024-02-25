@@ -102,3 +102,7 @@ def logout(request):
     messages.success(request, f"{request.user.username}, Вы вышли из аккаунта")
     auth.logout(request)
     return redirect(reverse('main:index'))
+
+
+def google_login(request):
+    return render(request, 'users/google_login.html')
