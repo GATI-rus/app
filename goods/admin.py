@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from goods.models import Categories, Products
+from goods.models import Categories, Products, Comment
 
 # admin.site.register(Categories)
 # admin.site.register(Products)
@@ -27,3 +27,7 @@ class ProductsAdmin(admin.ModelAdmin):
         ("price", "discount"),
         "quantity",
     ]
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('product', 'author', 'text', 'created_at')

@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
+{% endblock css %}
+
 {% block modal_cart %}
     {% include 'includes/cart_button.html' %}
 {% endblock %}
+
+
 
 
 {#{% block content %}#}
@@ -85,6 +91,28 @@
                             {% csrf_token %}
                             Добавить в корзину
                         </a>
+
+                        <!-- Комментарии -->
+                        <div class="comment-container">
+                            {% for comment in comments %}
+                                <div class="comment">
+                                    <p>Автор: {{ comment.author }}</p>
+                                    <p>{{ comment.text }}</p>
+                                    <p>Опубликовано: {{ comment.created_at }}</p>
+                                </div>
+                            {% empty %}
+                                <p>Нет комментариев.</p>
+                            {% endfor %}
+                        </div>
+
+                        <div class="add-comment">
+                            <a class="btn btn-outline-warning add-to-cart"
+                               href="{% url 'goods:add_comment' add_comment_slug=product.slug %}"
+                               data-product-id="{{ product.id }}">Добавить комментарий</a>
+
+                            {% csrf_token %}
+                        </div>
+
                         <p class="card-text mb-4 mt-4">id: {{ product.display_id }}</p>
                     </div>
                 </div>

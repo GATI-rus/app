@@ -1,5 +1,8 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
+
+from django.conf import settings
 
 
 class Categories(models.Model):
@@ -45,4 +48,18 @@ class Products(models.Model):
             return round(self.price - self.price * self.discount / 100, 2)
 
         return self.price
+
+class Comment(models.Model):
+    product = models.ForeignKey('Products', on_delete=models.CASCADE, related_name='comments', blank=True, null=True, verbose_name='Продукт')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Автор')
+    text = models.TextField(max_length=2000, verbose_name='Текст комментария', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f'{self.product} - {self.author.username}'
 
