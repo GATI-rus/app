@@ -45,3 +45,4 @@ class Products(models.Model):
             return round(self.price - self.price * self.discount / 100, 2)
 
         return self.price
+

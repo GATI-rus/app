@@ -209,3 +209,16 @@ $(document).ready(function () {
         }
     });
 });
+
+
+function searchFormSubmit() {
+    var searchInput = document.getElementById('search-input').value;
+    if (searchInput.trim() === '') {
+        window.location.href = '{% url "catalog:products" %}';
+    } else {
+        document.forms['search-form'].submit();
+    }
+}
+
+var textElement = document.querySelector('.move');
+textElement.classList.add('rotate');

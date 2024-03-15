@@ -3,7 +3,7 @@
 {% load goods_tags %}
 
 {% block modal_cart %}
-{% include 'includes/cart_button.html' %}
+    {% include 'includes/cart_button.html' %}
 {% endblock %}
 
 {% block content %}
@@ -16,6 +16,7 @@
             </button>
 
             <form action="
+
 
 
                     {% if request.GET.q %}{% url 'catalog:search' %}{% else %}{% url 'catalog:index' slug_url %}{% endif %}"
@@ -106,32 +107,65 @@
                             {% else %}
                                 <p><strong>{{ product.price }} р.</strong></p>
                             {% endif %}
-                                <a href="{% url "cart:cart_add" %}" class="btn add-to-cart"
-                        data-product-id="{{ product.id }}">
-                            {% csrf_token %}
-                            <img class="mx-1" src="{% static "deps/icons/cart-plus.svg" %}" alt="Catalog Icon"
-                                width="32" height="32" title="Добавить в корзину">
-                        </a>
+                            <a href="{% url "cart:cart_add" %}" class="btn add-to-cart"
+                               data-product-id="{{ product.id }}">
+                                {% csrf_token %}
+                                <img class="mx-1" src="{% static "deps/icons/cart-plus.svg" %}" alt="Catalog Icon"
+                                     width="32" height="32" title="Добавить в корзину">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
 
     </div>
 
     <!-- Пагинация -->
+    {#    {% if goods %}#}
+    {#        <nav aria-label="Page navigation example">#}
+    {#            <ul class="pagination justify-content-center my-4">#}
+    {#                <div class="custom-shadow d-flex">#}
+    {#                    <li class="page-item {% if not goods.has_previous %} disabled {% endif %}">#}
+    {#                        <a class="page-link" href="{% if goods.has_previous %}?#}
+    {#                        {% change_params page=goods.previous_page_number %}{% else %}#{% endif %}">Назад</a>#}
+    {#                    </li>#}
+    {##}
+    {#                    {% for page in goods.paginator.page_range %}#}
+    {#                        {% if page >= goods.number|add:-3 and page <= goods.number|add:3 %}#}
+    {#                            <li class="page-item {% if goods.number == page %}active{% endif %}">#}
+    {#                                <a class="page-link" href="?{% change_params page=page %}">{{ page }}</a>#}
+    {#                            </li>#}
+    {#                        {% endif %}#}
+    {#                    {% endfor %}#}
+    {##}
+    {#                    <li class="page-item {% if not goods.has_next %} disabled {% endif %}">#}
+    {#                        <a class="page-link" href="{% if goods.has_next %}?#}
+    {#                        {% change_params page=goods.next_page_number %}{% else %}#{% endif %}">Вперед</a>#}
+    {#                    </li>#}
+    {#                </div>#}
+    {#            </ul>#}
+    {#        </nav>#}
+    {#    {% endif %}#}
+
     {% if goods %}
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center my-4">
                 <div class="custom-shadow d-flex">
                     <li class="page-item {% if not goods.has_previous %} disabled {% endif %}">
                         <a class="page-link" href="{% if goods.has_previous %}?
-                        {% change_params page=goods.previous_page_number %}{% else %}#{% endif %}">Назад</a>
+                    {% change_params page=goods.previous_page_number %}{% else %}#{% endif %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                                <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+                            </svg>
+                            <i class="bi bi-arrow-left-square-fill">Назад</i>
+
+                        </a>
                     </li>
 
                     {% for page in goods.paginator.page_range %}
-                        {% if page >= goods.number|add:-2 and page <= goods.number|add:2 %}
+                        {% if page >= goods.number|add:-3 and page <= goods.number|add:3 %}
                             <li class="page-item {% if goods.number == page %}active{% endif %}">
                                 <a class="page-link" href="?{% change_params page=page %}">{{ page }}</a>
                             </li>
@@ -140,7 +174,13 @@
 
                     <li class="page-item {% if not goods.has_next %} disabled {% endif %}">
                         <a class="page-link" href="{% if goods.has_next %}?
-                        {% change_params page=goods.next_page_number %}{% else %}#{% endif %}">Вперед</a>
+                    {% change_params page=goods.next_page_number %}{% else %}#{% endif %}">
+                            <i class="bi bi-arrow-right-square-fill">Вперед</i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+                                <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+                            </svg>
+                        </a>
                     </li>
                 </div>
             </ul>

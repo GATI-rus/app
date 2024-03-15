@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import transaction
@@ -50,8 +52,9 @@ def create_order(request):
                                 quantity=quantity,
                             )
                             product.quantity -= quantity
-                            product.save()
                             telegram(neworder, cart_item)
+                            product.save()
+
 
                         # Очистить корзину пользователя после создания заказа
                         cart_items.delete()
@@ -87,6 +90,12 @@ def telegram(neworder, cart_item):
               f" Товар: {cart_item.product.name}\n" \
               f" Цена: {cart_item.product.sell_price()}\n" \
               f" Кол-во: {cart_item.quantity}\n"
+
+    now = datetime.datetime.now()
+    date_str = now.strftime("%d.%m.%Y")
+    message += f"Дата: {date_str}\n"
+
+
 
     bot = telebot.TeleBot(token)
 
