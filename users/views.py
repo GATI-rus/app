@@ -51,6 +51,8 @@ def registration(request):
             session_key = request.session.session_key
 
             user = form.instance
+            user.backend = 'django.contrib.auth.backends.ModelBackend'  # Добавьте эту строку
+
             auth.login(request, user)
 
             if session_key:
